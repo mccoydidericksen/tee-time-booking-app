@@ -26,7 +26,7 @@ const App = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     // send to server for validation on port 3001
-    fetch('https://golf-booking-backend.herokuapp.com/api/validate', {
+    fetch('https://overlake-golf-backend-d4818923f6f7.herokuapp.com/api/validate', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -37,7 +37,7 @@ const App = () => {
         await response.json();
       if (isValid) {
         // send text message to user via /api/sms
-        const resp = await fetch('https://golf-booking-backend.herokuapp.com/api/sms', {
+        const resp = await fetch('https://overlake-golf-backend-d4818923f6f7.herokuapp.com/api/sms', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
