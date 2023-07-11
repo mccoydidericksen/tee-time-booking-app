@@ -44,7 +44,7 @@ app.post('/api/sms', async (req, res) => {
       'security-code': securityCode,
       'code-length': 4,
       'language-code': 'en',
-      limit: 10,
+      limit: 50,
       'limit-ttl': 1,
     }),
   };

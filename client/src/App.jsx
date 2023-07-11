@@ -122,7 +122,7 @@ const App = () => {
             </div>
           </div>
           <div className="text-center lg:text-left">
-            <h1 className="text-5xl font-bold">⛳️ The Links Golf Course</h1>
+            <h1 className="text-4xl font-bold">⛳️ The Links at Overlake</h1>
             <p className="py-6">
               Enter the phone number associated with your membership to book a
               tee time.
