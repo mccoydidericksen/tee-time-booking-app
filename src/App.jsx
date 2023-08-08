@@ -17,7 +17,6 @@ const App = () => {
       body: JSON.stringify({ 'phoneNumber': phoneNumber, 'code': inputCode }),
     }).then(async (response) => {
       const resp = await response.json();
-      console.log(resp)
       return resp['data']['valid'];
     });
     if (codeMatch) {
