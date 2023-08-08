@@ -9,7 +9,7 @@ const App = () => {
     // get security code from input element
     const inputCode = event.target[0].value;
     // validate otp
-    const codeMatch = await fetch('http://localhost:3001/sms/verify-otp', {
+    const codeMatch = await fetch('https://overlake-sms-backend-36d6c761a65b.herokuapp.com/sms/verify-otp', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ const App = () => {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    fetch('http://localhost:3001/validate-phone', {
+    fetch('https://overlake-sms-backend-36d6c761a65b.herokuapp.com/validate-phone', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -44,7 +44,7 @@ const App = () => {
       const { isValid, phoneNumber, firstName, lastName } =
         await response.json();
       if (isValid) {
-        const resp = await fetch('http://localhost:3001/sms/send-otp', {
+        const resp = await fetch('https://overlake-sms-backend-36d6c761a65b.herokuapp.com/sms/send-otp', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
