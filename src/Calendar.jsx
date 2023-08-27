@@ -3,7 +3,7 @@ import { InlineWidget } from 'react-calendly';
 
 function Calendar(props) {
   return (
-    <div className="App min-h-screen">
+    <div className="App min-h-screen bg-white">
       <InlineWidget
         url={props.person.calendlyLink}
         pageSettings={{
