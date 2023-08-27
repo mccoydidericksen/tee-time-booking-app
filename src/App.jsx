@@ -4,6 +4,21 @@ import Calendar from './Calendar.jsx';
 const App = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [validated, setValidated] = useState(false);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [calendlyLink, setCalendlyLink] = useState('');
+  const getBookingLink = async () => {
+    const bookingLink = await fetch('https://overlake-sms-backend-36d6c761a65b.herokuapp.com/calendly/getLink', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(async (response) => {
+      const resp = await response.json();
+      return resp['data']['resource']['booking_url']
+    })
+    return bookingLink
+  }
   const validateCode = async (event) => {
     event.preventDefault();
     // get security code from input element
@@ -20,10 +35,12 @@ const App = () => {
       return resp['data']['valid'];
     });
     if (codeMatch) {
-      // set validated to true
-      setValidated(true);
       // close modal
       document.getElementById('security_modal').checked = false;
+      // set validated to true
+      setValidated(true);
+      const link = await getBookingLink();
+      setCalendlyLink(link);
     } else {
       // close modal
       document.getElementById('security_modal').checked = false;
@@ -40,9 +57,11 @@ const App = () => {
       },
       body: JSON.stringify({ phoneNumber }),
     }).then(async (response) => {
-      const { isValid, phoneNumber, firstName, lastName } =
+      const { isValid, phoneNumber, name, email } =
         await response.json();
       if (isValid) {
+        setName(name);
+        setEmail(email);
         const resp = await fetch('https://overlake-sms-backend-36d6c761a65b.herokuapp.com/sms/send-otp', {
           method: 'POST',
           headers: {
@@ -58,7 +77,7 @@ const App = () => {
     });
   };
   if (validated) {
-    return <Calendar />;
+    return <Calendar  person={{ name: name, email: email, phoneNumber: phoneNumber, calendlyLink: calendlyLink }}/>;
   } else {
     return (
       <div className="hero min-h-screen bg-base-200">

@@ -1,11 +1,27 @@
 import React from 'react';
+import { InlineWidget } from 'react-calendly';
 
-function Calendar() {
+function Calendar(props) {
   return (
-    <div>
-      <iframe className='hero min-h-screen bg-base-200'
-        src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0UorRHpnLx-5IPZ8BOnthdxoGQLi25V_oSsdWwOzmolrTrIL4RCf0EkX6x4Q5OasOo-_0k4H8X?gv=true&ctz=America%2FDenver"
-      ></iframe>
+    <div className="App min-h-screen">
+      <InlineWidget
+        url={props.person.calendlyLink}
+        pageSettings={{
+          backgroundColor: 'ffffff',
+          hideEventTypeDetails: false,
+          hideLandingPageDetails: true,
+          primaryColor: '00a2ff',
+          textColor: '4d5055',
+        }}
+        prefill={{
+          email: props.person.email,
+          name: props.person.name,
+          customAnswers: {
+            a1: `+1${props.person.phoneNumber}`,
+            a2: '1',
+          },
+        }}
+      />
     </div>
   );
 }
